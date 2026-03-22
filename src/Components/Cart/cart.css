@@ -1,0 +1,166 @@
+.cart-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    min-height: 400px;
+}
+
+.left-cart {
+    width: 100%;
+    max-height: 336px;
+    /* Limit height to 500px */
+    overflow-y: auto;
+    padding-right: 10px;
+    /* Add some padding to the right for spacing */
+}
+
+.cart-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.cart-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.cart-item div {
+    margin-right: 10px;
+}
+
+.cart-item img {
+    width: 80px;
+    height: auto;
+}
+
+.right-cart {
+    width: 30%;
+}
+
+.cart-price {
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+.cart-price div {
+    margin-bottom: 10px;
+}
+
+.cart-price a {
+    display: block;
+    text-align: center;
+    background-color: #FFD600;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+
+
+/* Add hover effect to cart items */
+.cart-item:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+/* Customize scrollbar */
+.left-cart {
+    scrollbar-width: thin;
+    /* For Firefox */
+    scrollbar-color: #999 transparent;
+    /* For Firefox */
+}
+
+.left-cart::-webkit-scrollbar {
+    width: 8px;
+}
+
+.left-cart::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.left-cart::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 4px;
+}
+
+.left-cart::-webkit-scrollbar-thumb:hover {
+    background-color: #777;
+}
+
+/* Increase width and height of select button */
+.quantity select {
+    width: 100px;
+    /* Adjust width as needed */
+    height: 30px;
+    /* Adjust height as needed */
+    border: 1px solid #ccc;
+    /* Add border for consistency */
+    border-radius: 5px;
+    /* Add border radius for a rounded appearance */
+    padding: 5px;
+    /* Add padding for better spacing */
+}
+
+.quantity select:focus {
+    outline: 2px solid #007bff;
+}
+
+.quantity select {
+    transition: border-color 0.3s;
+}
+.noitem-cart-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+@media screen and (max-width: 768px) {
+    .cart-back-button {
+        display: none;
+    }
+
+
+    .cart-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin-bottom: 80px;
+    }
+
+    .quantity select {
+        width: 3rem;
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: center;
+        /* width: 100vw; */
+    }
+
+    .left-cart {
+        max-height: none;
+        overflow-y: visible;
+
+    }
+
+    .right-cart {
+        width: 100%;
+        /* Reset width to 30% for larger screens */
+        margin-top: 50px;
+        /* Remove margin top for larger screens */
+    }
+}

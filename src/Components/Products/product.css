@@ -1,0 +1,494 @@
+section {
+    max-width: 1516px;
+    width: 95%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.Head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Head-content {
+    display: flex;
+    align-items: center;
+    height: 63px;
+
+}
+
+.rightHead {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    gap: 20px;
+
+}
+
+.rightHead a {
+    /* display: inline-block; */
+    width: 200px;
+    height: 52px;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    background-color: #1D7000;
+    border-radius: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 10px;
+}
+
+
+
+.profile {
+
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #2E0052;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.curentPath a {
+    text-decoration: none;
+    margin-left: 10px;
+    color: black;
+}
+
+.profile.active .hoverbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.hoverbox {
+    display: none;
+    border-radius: 20px;
+    position: absolute;
+    padding: 10px;
+    z-index: 5;
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    width: 133px;
+    height: 80px;
+    margin-top: 120px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    justify-content: center;
+    gap: 5px;
+}
+
+.curentPath {
+    margin: 20px;
+}
+
+
+.Head-content div {
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+
+}
+
+.banner {
+    position: relative;
+    /* Make the banner position relative for absolute positioning */
+    background-image: linear-gradient(#7286B4, #E794CE);
+    height: 307px;
+    border-radius: 29px;
+    display: flex;
+    justify-content: center;
+    /* Center align banner content */
+    align-items: center;
+    /* Center align banner content */
+}
+
+.banner-content {
+    text-align: center;
+    /* Center align banner text */
+}
+
+.banner-content p {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 50px;
+    margin: 0;
+    width: 50%;
+}
+
+.banner-image {
+    position: absolute;
+    width: 532px;
+    /* height: 320px; */
+    bottom: 0;
+    /* Position the banner image at the bottom */
+    right: 0;
+}
+
+/* Section 2 */
+.above-banner{
+    display: none;
+}
+.search-box {
+    position: relative;
+
+}
+
+.search-box img {
+    position: absolute;
+    width: 35px;
+    margin-top: 14px;
+    margin-left: 20px;
+}
+
+.search-box input {
+    max-width: 100%;
+    width: calc(100%);
+    /* Adjusted */
+    height: 60px;
+    border-radius: 48px;
+    padding-left: 90px;
+}
+
+.search-box select {
+    max-width: 100%;
+    width: 200px;
+}
+/* section2 ends */
+
+/* all button css */
+.all-buttons {
+    display: flex;
+    align-items: center;
+    height: 90px;
+    justify-content: space-around;
+    overflow-x: auto; 
+}
+
+
+
+.button-box select {
+    background-color: #D9D9D9;
+    width: 140px;
+    border-radius:7px;
+    height: 30px;
+    margin-right: 10px; /* Add margin between button boxes */
+}
+
+.sorting select {
+    width: auto;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    height: 30px;
+    flex: 1;
+    width: 190px;
+}
+
+/* all button css */
+
+
+
+/* section3 */
+/* grid view start here */
+.grid-view {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 80px;
+}
+
+.cart-image {
+    display: inline-block;
+    position: relative;
+    width: 51px;
+    height: 51px;
+}
+
+
+
+.grid-item {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #fff;
+    margin: 10px;
+}
+.grid-description{
+    margin-top: -22px;
+}
+
+.grid-item img {
+    background-color: #D4E5FF;
+    width: 100%;
+    max-width: 250px;
+    height: 300px;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    /* Adjust height as needed */
+}
+
+.loading::after {
+    content: '';
+    width: 40px;
+    /* Width of the spinner */
+    height: 40px;
+    /* Height of the spinner */
+    border: 4px solid #f3f3f3;
+    /* Light grey border */
+    border-top: 4px solid #3498db;
+    /* Blue border on top */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    /* Spin animation */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* grid view end here */
+
+.cart-icon-image {
+    position: relative;
+    bottom: 64px;
+    float: right;
+    padding: 15px;
+    color: #1D7000;
+    margin-right: 10px;
+    background-color: #FFFFFF;
+    width: 51px;
+    height: 51px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/* List view starts here */
+.list-view {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 80px;
+}
+
+.list-item {
+    
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: space-between;
+    border: 2px solid #fff;
+    margin: 10px;
+    gap: 50px;
+    
+}
+
+.list-description{
+    margin-top: 20px;
+   
+
+}
+.list-description p{
+    margin-top:8px;
+    font-family: "Roboto",'Courier New', Courier, monospace;
+    font-weight: 500;
+
+}
+
+.listimage img {
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    object-fit: fill;
+    padding: 30px;
+    background-color: #D4E5FF;
+}
+
+.view-button {
+    display: flex;
+    background-color: #2E0052;
+    width: 150px;
+    height: 48px;
+    border-radius: 26px;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin-top: 20px;
+
+}
+
+/* List view ends here */
+
+
+/* Feedabck */
+.feedback-container {
+    position: relative;
+    bottom: 75px;
+    right: 45px;
+    float: right;
+    z-index: 999;
+}
+
+
+.feedback-icon {
+    /* background-color: #1D7000; */
+    /* color: #FFFFFF; */
+    /* width: 100px; */
+    /* height:100px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    cursor: pointer;
+
+}
+
+.feedback-form {
+    position: absolute;
+    bottom: 60px;
+    right: 40px;
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+    padding: 10px;
+    width: 300px;
+    height: 330px;
+    z-index: 1000;
+
+}
+
+.feedback-form h1 {
+    font-size: 18px;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.select-option select {
+    width: 100%;
+    width: calc(100% - 20px);
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: #F3F3F3;
+    border-radius: 5px;
+}
+
+textarea {
+    width: calc(100% - 20px);
+    /* Adjust width as needed */
+    margin: 10px 0;
+    height: 150px;
+    padding: 5px;
+    border: 1px solid #DDDDDD;
+    border-radius: 5px;
+    background-color: #F3F3F3;
+}
+
+.btn {
+    text-align: center;
+}
+
+.btn button {
+    background-color: #2E0052;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 26.12px;
+    cursor: pointer;
+
+}
+
+/* feedback end here */
+
+
+/* Adjust styles for screens smaller than 768px */
+@media screen and (max-width: 768px) {
+    nav {
+        display: none;
+    }
+    .section-2 .search-box{
+        display: none;
+    }
+    .above-banner{
+        display: block;
+        background-color: #2E0052;
+        padding: 20px;
+        position: fixed;
+        right: 0;
+        left: 0;
+        top: 0;
+        z-index: 10000;
+    }
+
+    .above-banner input{
+       border-radius: 15px;
+    }
+
+    .section-head {
+        display: none;
+    }
+
+    .banner{
+        margin-top: 150px;
+        width: 100%;
+        height: 130px;
+    }
+  
+
+    .banner-content p {
+        font-size: 20px;
+        
+    }
+
+    .banner-image {
+        
+        width: 233px;
+        height: 153px;
+        /* object-fit: cover; */
+        right: 0;
+        bottom: 0;
+        
+    }
+  
+
+    .all-buttons {
+        max-width: fit-content;
+        overflow-x: auto;
+    }
+    .grid-box,
+    .list-box{
+        display: none;
+    }
+
+   
+}

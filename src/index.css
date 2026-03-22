@@ -1,0 +1,22 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.back-button{
+  text-decoration: none;
+  width: 250px;
+  height: 50px;
+  margin-left: 70px;
+  background-color:#2E0052 ;
+  display: flex;
+  color: #FFFFFF;
+  border-radius: 16px;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  
+}
+
