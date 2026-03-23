@@ -1,0 +1,83 @@
+.succes-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Set container height to at least the viewport height */
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.image-4 {
+    margin-right: 20px; /* Adjusted margin for better spacing */
+    align-self: flex-start; /* Align image-4 to the start of the left side */
+}
+
+.musicart {
+    margin: 0.4rem 0 0.3rem 0;
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 2.8rem;
+    color: #2E0052;
+}
+
+.container-3 {
+    box-shadow: 0.9rem 1rem 1.4rem 0.1rem rgba(0, 0, 0, 0.11);
+    border-radius: 0.7rem;
+    border: 0.2rem solid #E3E3E3;
+    background: #FFFFFF;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    padding: 2rem; 
+    max-width: 800px; 
+    width: 90%; 
+    box-sizing: border-box;
+    height: 500px;
+    margin:50px auto; 
+   
+}
+
+.go-back-to-home-page {
+    width: 100%; /* Set button width to 100% for responsiveness */
+    max-width: 400px; /* Set max-width to prevent button from expanding too much */
+    height: 50px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 1rem;
+    color: #FFFFFF;
+    background-color: #2E0052; /* Added background color for the button */
+    border: none; /* Removed button border */
+    border-radius: 0.5rem; /* Added button border radius */
+    cursor: pointer; /* Added cursor pointer for better user interaction */
+}
+
+.you-will-be-receiving-a-confirmation-email-with-order-details {
+    margin-bottom: 20px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 20px;
+    color: #969696;
+    text-align: center; /* Center text */
+}
+
+.order-text {
+    margin: 10px;
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 20px;
+    color: #000000;
+    text-align: center; /* Center text */
+}
+
+@media only screen and (max-width: 768px) {
+    .container-3 {
+        padding: 1rem; /* Adjusted padding for smaller screens */
+    }
+}

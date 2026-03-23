@@ -1,0 +1,168 @@
+.mc-header-wrapper {
+  width: 100%;
+  background: #ffffff;
+}
+
+.mc-header {
+  max-width: 1400px;
+  width: 95%;
+  margin: 0 auto;
+  padding: 26px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.mc-header-left,
+.mc-header-center,
+.mc-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.mc-header-left {
+  flex: 1;
+}
+
+.mc-header-center {
+  flex: 1;
+  justify-content: center;
+}
+
+.mc-header-right {
+  flex: 1;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.mc-logo-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.mc-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.mc-brand-name {
+  font-family: "Roboto", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.mc-page-title {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.mc-cart-btn {
+  min-width: 210px;
+  height: 54px;
+  padding: 0 22px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+  background-color: #1d7000;
+  border-radius: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.mc-cart-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.mc-invoice-link {
+  text-decoration: none;
+  color: #2e0052;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #f6effc;
+}
+
+.mc-profile {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 2px solid #2e0052;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  color: #2e0052;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 1024px) {
+  .mc-header {
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .mc-header-left,
+  .mc-header-center,
+  .mc-header-right {
+    flex: unset;
+    width: 100%;
+  }
+
+  .mc-header-center {
+    justify-content: flex-start;
+  }
+
+  .mc-header-right {
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mc-header {
+    width: 92%;
+    padding: 18px 0;
+  }
+
+  .mc-brand-name {
+    font-size: 28px;
+  }
+
+  .mc-page-title {
+    font-size: 24px;
+  }
+
+  .mc-header-right {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .mc-cart-btn,
+  .mc-invoice-link {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+
+  .mc-profile {
+    align-self: flex-end;
+  }
+}

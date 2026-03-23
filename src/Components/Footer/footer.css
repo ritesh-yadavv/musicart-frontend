@@ -1,0 +1,23 @@
+.foot {
+    max-width: 1728px;
+    background-color: #2E0052;
+    color: #FFFFFF;
+    height: 87px;
+}
+
+.footer-text {
+    font-family: "Roboto", Courier, monospace;
+    font-weight: 500;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+    .foot {
+        background-color: #2E0052;
+        color: #FFFFFF;
+        display: none;
+    }
+}

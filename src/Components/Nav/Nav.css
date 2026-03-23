@@ -1,0 +1,107 @@
+/* Define styles for the navigation bar */
+nav {
+  max-width: 1728px;
+  height: 63px;
+  background-color: #2E0052;
+  /* position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 9999; */
+}
+
+/* Style for the navigation container */
+.nav-container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+
+/* Style for the navigation image */
+.nav-img {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+}
+
+/* Style for login and signup links */
+.login-signup {
+  text-decoration: none;
+  margin: 3px;
+}
+
+/* Style for navigation items */
+.nav-item {
+  color: #FFFFFF;
+}
+
+/* Hide the bottom navigation icons by default */
+.bottom-nav-icons {
+  display: none;
+}
+
+/* Style for logout link */
+.logout {
+  cursor: pointer;
+}
+
+/* Media query for smaller screens */
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  /* Display the bottom navigation when on smaller screens */
+  .bottom-nav-icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 63px;
+    background-color: #FFFFFF;
+    z-index: 9999;
+  }
+
+  /* Style for bottom navigation icons */
+  .bottom-nav-icons a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #2E0052;
+    text-decoration: none;
+    font-size: 19px;
+    position: relative; 
+  }
+
+  /* Style for line above active icon */
+  .bottom-nav-icons a.active::before {
+    content: '';
+    position: absolute;
+    width: 100%; 
+    height: 2px; 
+    background-color: #2E0052;
+    top: -4px; 
+    left: 0; 
+  }
+
+  /* Add style for default bottom navigation icon */
+  .bottom-nav-icons a::before {
+    content: '';
+    position: absolute;
+    width: 100%; 
+    height: 2px; 
+    background-color: transparent; 
+    top: -4px; 
+    left: 0;
+    transition: background-color 0.3s; 
+  }
+
+  /* Update style for active bottom navigation icon */
+  .bottom-nav-icons a.active::before {
+    background-color: #2E0052; 
+  }
+}

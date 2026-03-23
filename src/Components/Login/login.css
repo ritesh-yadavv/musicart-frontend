@@ -1,0 +1,115 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto";
+}
+
+.wrapper {
+    width: 90%; /* Adjusted width for responsiveness */
+    max-width: 547px;
+    padding: 20px;
+    border: 3px solid #D9D9D9;
+    border-radius: 23px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.wrapper h1 {
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.wrapper p {
+    font-size: 17.75px;
+    margin-top: 30px; /* Adjusted margin for responsiveness */
+}
+
+.login-heading {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-heading img {
+    width: 63px;
+    height: 63px;
+}
+
+.login-heading h3 {
+    font-weight: 600;
+    font-size: 36px; /* Adjusted font size for responsiveness */
+}
+
+.wrapper input,
+.wrapper button {
+    height: 45px;
+    margin-top: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    column-gap: 20px;
+}
+
+.login-container button {
+    background-color: #2E0052;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-lower-box {
+    font-weight: 400;
+    max-width: 547px;
+    font-size: 18px; /* Adjusted font size for responsiveness */
+    margin-top: 20px; /* Adjusted margin for responsiveness */
+    width: 90%; /* Adjusted width for responsiveness */
+    margin-bottom: 20px;
+}
+
+.login-lower-box a {
+    display: flex;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: 2px solid #BDBDBD;
+    border-radius: 10px;
+}
+.error{
+    color: red;
+    font-size: 10px;
+}
+
+.para {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.para hr {
+    width: 120px; /* Adjusted width for responsiveness */
+    margin: 0 20px;
+    margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 750px) {
+    .wrapper {
+        max-width: 90%;
+    }
+
+    .login-heading h3 {
+        font-size: 28px; /* Adjusted font size for responsiveness */
+    }
+
+    .login-lower-box {
+        font-size: 16px; /* Adjusted font size for responsiveness */
+    }
+}

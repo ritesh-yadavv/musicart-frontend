@@ -1,0 +1,152 @@
+.invoice-details-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+}
+
+.invoice-details-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.invoice-details-topbar h2 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.invoice-details-back-btn {
+  text-decoration: none;
+  background: #8f0594;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.invoice-details-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.invoice-details-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.invoice-section {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.invoice-section h3 {
+  margin-top: 0;
+  color: #b54400;
+}
+
+.invoice-name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.invoice-address {
+  width: 100%;
+  min-height: 100px;
+  resize: none;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+
+.invoice-products {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.invoice-product-card {
+  display: flex;
+  gap: 16px;
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  padding: 14px;
+  background: #fafafa;
+}
+
+.invoice-product-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.invoice-product-info h4 {
+  margin: 0 0 10px;
+}
+
+.invoice-product-info p {
+  margin: 5px 0;
+}
+
+.invoice-details-right {
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.invoice-summary-card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.invoice-summary-card h3 {
+  margin-top: 0;
+  color: #b54400;
+}
+
+.invoice-summary-card p {
+  margin: 10px 0;
+}
+
+.invoice-details-empty {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+@media (max-width: 768px) {
+  .invoice-details-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .invoice-details-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .invoice-product-card {
+    flex-direction: column;
+  }
+
+  .invoice-product-card img {
+    width: 100%;
+    height: 220px;
+  }
+
+  .invoice-details-back-btn {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+}
