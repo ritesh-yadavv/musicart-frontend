@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Nav from '../Nav/Nav';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import baseUrl from '../../api';
+import baseUrl from '../../../api';
 import "./productdetails.css";
 import Header from '../Header/Header';
 import { faShoppingCart, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';

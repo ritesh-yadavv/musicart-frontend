@@ -1,17 +1,16 @@
-import React from 'react'
-import Navbar from "../Components/Nav/Nav"
-import Header from "../Components/Header/Header"
-import CheckOut from "../Components/CheckOut/CheckOut"
+import React from "react";
+import Nav from "../Components/Nav/Nav";
+import Header from "../Components/Header/Header";
+import Cart from "../Components/Cart/Cart";
 
-const ChechOutPage = () => {
-    return (
-        <>
-            <Navbar />
-            <Header />
-            <CheckOut />
+const CartPage = () => {
+  return (
+    <>
+      <Nav />
+      <Header />
+      <Cart />
+    </>
+  );
+};
 
-        </>
-    )
-}
-
-export default ChechOutPage
+export default CartPage;

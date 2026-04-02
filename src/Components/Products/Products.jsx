@@ -1,242 +1,239 @@
-import React, { useEffect, useState } from 'react'
-import { faShoppingCart, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import image1 from "../../assets/bannerimg.png"
-import image2 from "../../assets/listButton.png"
-import image3 from "../../assets/gridButton1.png"
-import image4 from "../../assets/listButton1.png"
-import image5 from "../../assets/image 4.png"
-import image6 from "../../assets/gridButton.png"
-
-import "./product.css"
-import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
-import baseUrl from "../../api"
-import toast, { Toaster } from 'react-hot-toast';
-
+import React, { useEffect, useState } from "react";
+import { faShoppingCart, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import bannerImage from "../../assets/bannerimg.png";
+import listButton from "../../assets/listButton.png";
+import gridButtonActive from "../../assets/gridButton1.png";
+import listButtonActive from "../../assets/listButton1.png";
+import logoImage from "../../assets/image 4.png";
+import gridButton from "../../assets/gridButton.png";
+import searchIcon from "../../assets/search.png";
+import "./product.css";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import baseUrl from "../../../api";
+import toast, { Toaster } from "react-hot-toast";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [headPhoneType, setHeadPhoneType] = useState('');
-  const [companyType, setCompanyType] = useState('');
-  const [colorType, setColorType] = useState('');
-  const [price, setPrice] = useState('');
-  const [sortBy, SetsortBy] = useState('');
-  const [search, setSearch] = useState("")
-  const [layout, setLayout] = useState('grid');
+  const [headPhoneType, setHeadPhoneType] = useState("");
+  const [companyType, setCompanyType] = useState("");
+  const [colorType, setColorType] = useState("");
+  const [sortBy, setSortBy] = useState("");
+  const [search, setSearch] = useState("");
+  const [layout, setLayout] = useState("grid");
   const [profileVisible, setProfileVisible] = useState(false);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const [feedbackType, setFeedbackType] = useState("");
   const [message, setMessage] = useState("");
   const [cartItemCount, setCartItemCount] = useState(0);
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
-
   const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId");
+  let name = localStorage.getItem("name");
 
-
-  let Name = localStorage.getItem("name");
-  if (Name !== null) {
-    Name = Name.toUpperCase();
+  if (name) {
+    name = name.toUpperCase();
   }
 
-
   useEffect(() => {
-    axios.get(`${baseUrl}/product/getall?name=${search}&&color=${colorType}&&company=${companyType}&&headphone_type=${headPhoneType}&&sortBy=${sortBy}`).then((res) => {
-      setProducts(res.data.products);
-      // console.log(res.data);
-    }).catch((err) => {
-      console.log(err)
-    });
+    const fetchProducts = async () => {
+      try {
+        const res = await axios.get(
+          `${baseUrl}/product/getall?name=${search}&color=${colorType}&company=${companyType}&headphone_type=${headPhoneType}&sortBy=${sortBy}`
+        );
+        setProducts(res.data.products || []);
+      } catch (err) {
+        console.error("Products fetch error:", err);
+        setProducts([]);
+      }
+    };
+
+    fetchProducts();
   }, [search, colorType, companyType, headPhoneType, sortBy]);
 
-  const toggleLayout = (layoutType) => {
-    setLayout(layoutType);
-  };
+  useEffect(() => {
+    const fetchCartCount = async () => {
+      try {
+        if (!token) {
+          setCartItemCount(0);
+          return;
+        }
+
+        const response = await axios.get(`${baseUrl}/cart/count`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setCartItemCount(response.data.count || 0);
+      } catch (error) {
+        console.error("Cart count error:", error);
+        setCartItemCount(0);
+      }
+    };
+
+    fetchCartCount();
+  }, [token]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
-    //  console.log(search)
-  }
-
-  const toggleProfile = () => {
-    setProfileVisible(!profileVisible);
   };
 
   const handleNavigate = (id) => {
-    console.log(id);
-    navigate(`/product/${id}`)
-  }
-  const HandleLogout = () => {
+    navigate(`/product/${id}`);
+  };
+
+  const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("name");
     navigate("/home");
-    return;
-  }
-
-  const toggleFeedbackForm = () => {
-    setShowFeedbackForm(!showFeedbackForm);
   };
 
-  const handleFeedBacksubmit = async () => {
-    if (feedbackType === "" || message === "") {
-      setError("Please fill all the fields")
+  const handleFeedbackSubmit = async () => {
+    if (!feedbackType || !message) {
+      setError("Please fill all the fields");
       return;
     }
 
     try {
-      const response = await axios.post(
+      await axios.post(
         `${baseUrl}/feedback/create`,
-        { type: feedbackType, message: message }, // Pass data as an object
+        { type: feedbackType, message },
         {
           headers: {
-            Authorization: `${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
+
       toast.success("Feedback saved successfully");
-
-      setShowFeedbackForm(false)
-
+      setShowFeedbackForm(false);
+      setFeedbackType("");
+      setMessage("");
+      setError("");
     } catch (error) {
-      console.error(error);
+      console.error("Feedback error:", error);
     }
   };
-
-
-
 
   const addToCart = async (id) => {
     try {
-      const token = localStorage.getItem('token');
       if (!token) {
         navigate("/login");
-        console.error('Token not found');
         return;
       }
 
-      // Make API call to add item to cart
-      const response = await axios.post(`${baseUrl}/cart/add`, {
-        productId: id,
-        quantity: 1,
-      }, {
-        headers: {
-          Authorization: `${token}`,
+      await axios.post(
+        `${baseUrl}/cart/add`,
+        {
+          productId: id,
+          quantity: 1,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      // Update cart count
-      setCartItemCount(prevCount => prevCount + 1);
-
-      toast.success('Item added to cart:');
-
+      setCartItemCount((prev) => prev + 1);
+      toast.success("Item added to cart");
     } catch (error) {
-      console.error('Error adding item to cart:', error);
+      console.error("Add to cart error:", error);
     }
   };
 
-
-  useEffect(() => {
-    axios.get(`${baseUrl}/cart/count`, {
-      headers: {
-        Authorization: `${token}`,
-      },
-    }).then((response) => {
-      // console.log(response)
-      setCartItemCount(response.data.count);
-    })
-  }, [cartItemCount]);
-
   return (
     <>
-      <Toaster position="bottom-right"
-        reverseOrder={false} />
+      <Toaster position="bottom-right" reverseOrder={false} />
 
-      <section className='section-head'>
-        <div className='Head'>
-          <div className='Head-content'>
+      <section className="section-head">
+        <div className="Head">
+          <div className="Head-content">
             <div>
-              <img src={image5} alt="" />
+              <img src={logoImage} alt="Musicart" />
             </div>
-            <div>Musicart </div>
+            <div>Musicart</div>
 
-            <div className='curentPath'>
-              <Link to={"/home"}>Home</Link>
-              {token ? <Link to={"/invoice"}>invoice</Link> : null}
+            <div className="curentPath">
+              <Link to="/home">Home</Link>
+              {token ? <Link to="/invoice">invoice</Link> : null}
             </div>
           </div>
 
-          {(token && Name) ?
+          {token && name ? (
             <div className="rightHead">
-              <div className='cart-box'>
-                <Link to={"/cart"}>  <FontAwesomeIcon icon={faShoppingCart} />View Cart {cartItemCount}</Link>
+              <div className="cart-box">
+                <Link to="/cart">
+                  <FontAwesomeIcon icon={faShoppingCart} />
+                  View Cart {cartItemCount}
+                </Link>
               </div>
-              <div className={`profile ${profileVisible ? 'active' : ''}`} onClick={toggleProfile}>
-                {Name.charAt(0)}
-                {Name.split(' ').length > 1 && Name.split(' ')[Name.split(' ').length - 1].charAt(0)}
+
+              <div
+                className={`profile ${profileVisible ? "active" : ""}`}
+                onClick={() => setProfileVisible(!profileVisible)}
+              >
+                {name.charAt(0)}
+                {name.split(" ").length > 1
+                  ? name.split(" ")[name.split(" ").length - 1].charAt(0)
+                  : ""}
 
                 <div className="hoverbox">
                   <div className="content">
-                    <div>{Name}</div>
-                    <div onClick={HandleLogout}>
-                      Logout
-                    </div>
+                    <div>{name}</div>
+                    <div onClick={handleLogout}>Logout</div>
                   </div>
                 </div>
               </div>
-
-            </div> : null}
-
+            </div>
+          ) : null}
         </div>
-
       </section>
 
-      <div className='above-banner search-box'>
-        <img src="src\assets\search.png" alt="" />
-        <input type="text" placeholder='Search by Product Name' onChange={handleSearch} />
+      <div className="above-banner search-box">
+        <img src={searchIcon} alt="Search" />
+        <input
+          type="text"
+          placeholder="Search by Product Name"
+          onChange={handleSearch}
+        />
       </div>
 
       <section>
-        <div className='banner'>
-          <div className='banner-content'>
-            <p>Grab upto 50% off on
-              Selected headphones</p>
-            <img className='banner-image' src={image1} alt="" />
+        <div className="banner">
+          <div className="banner-content">
+            <p>Grab upto 50% off on Selected headphones</p>
+            <img className="banner-image" src={bannerImage} alt="Banner" />
           </div>
         </div>
-
       </section>
 
-      {/* section 2 starts here */}
       <section>
-
-        <div className='section-2'>
-          <div className='search-box'>
-            <img src="src\assets\search.png" alt="" />
-            <input type="text" placeholder='Search by Product Name' onChange={handleSearch} />
+        <div className="section-2">
+          <div className="search-box">
+            <img src={searchIcon} alt="Search" />
+            <input
+              type="text"
+              placeholder="Search by Product Name"
+              onChange={handleSearch}
+            />
           </div>
-          {/* all button start here */}
-          <div className='all-buttons'>
 
-
-            <div className='button-box grid-box' onClick={() => toggleLayout('grid')}>
-              {
-                layout == "grid" ? <img src={image3} /> : <img src={image6} />
-              }
-
-            </div>
-            <div className='button-box list-box' onClick={() => toggleLayout('list')}>
-              {
-                layout == "list" ? <img src={image4} /> : <img src={image2} />
-              }
-
+          <div className="all-buttons">
+            <div className="button-box grid-box" onClick={() => setLayout("grid")}>
+              {layout === "grid" ? <img src={gridButtonActive} alt="Grid" /> : <img src={gridButton} alt="Grid" />}
             </div>
 
+            <div className="button-box list-box" onClick={() => setLayout("list")}>
+              {layout === "list" ? <img src={listButtonActive} alt="List" /> : <img src={listButton} alt="List" />}
+            </div>
 
-            <div className='button-box headphone'>
-              <select onChange={(e) => { setHeadPhoneType(e.target.value) }}>
+            <div className="button-box headphone">
+              <select onChange={(e) => setHeadPhoneType(e.target.value)}>
                 <option value="">Headphone type</option>
                 <option value="in-Ear">In-ear headphone</option>
                 <option value="On-ear">On-ear headphone</option>
@@ -244,8 +241,8 @@ const Products = () => {
               </select>
             </div>
 
-            <div className='button-box comapny'>
-              <select onChange={(e) => { setCompanyType(e.target.value) }}>
+            <div className="button-box comapny">
+              <select onChange={(e) => setCompanyType(e.target.value)}>
                 <option value="">Company</option>
                 <option value="JBL">JBL</option>
                 <option value="Apple">Apple</option>
@@ -256,8 +253,8 @@ const Products = () => {
               </select>
             </div>
 
-            <div className='button-box color'>
-              <select onChange={(e) => { setColorType(e.target.value) }} >
+            <div className="button-box color">
+              <select onChange={(e) => setColorType(e.target.value)}>
                 <option value="">Colour</option>
                 <option value="red">Red</option>
                 <option value="blue">Blue</option>
@@ -269,17 +266,8 @@ const Products = () => {
               </select>
             </div>
 
-            <div className='button-box price'>
-              <select onChange={(e) => { setPrice(e.target.value) }}>
-                <option value="">Price</option>
-                <option value="₹0 - ₹1,000">₹0 - ₹1,000</option>
-                <option value="₹1,000 - ₹10,000">₹1,000 - ₹10,000</option>
-                <option value="₹10,000 - ₹20,000">₹10,000 - ₹20,000</option>
-              </select>
-            </div>
-
-            <div className='button-box sorting'>
-              <select onChange={(e) => { SetsortBy(e.target.value) }}>
+            <div className="button-box sorting">
+              <select onChange={(e) => setSortBy(e.target.value)}>
                 <option value="">Sort by : Featured</option>
                 <option value="lowestPrice">Price : Lowest</option>
                 <option value="highestPrice">Price : Highest</option>
@@ -288,76 +276,112 @@ const Products = () => {
               </select>
             </div>
           </div>
-          {/* all button end here */}
         </div>
       </section>
-      {/* section 2 Ends here */}
 
       {products.length === 0 ? (
         <div className="loading"></div>
       ) : (
         <section>
-
-          <div className={` ${layout === 'grid' ? 'grid-view' : 'list-view'}`}>
+          <div className={layout === "grid" ? "grid-view" : "list-view"}>
             {products.map((product) => (
-              <div className={`${layout === 'grid' ? 'grid-item' : 'list-item'}`} key={product._id}>
+              <div
+                className={layout === "grid" ? "grid-item" : "list-item"}
+                key={product._id}
+              >
                 <div className="listimage">
-                  <img src={product.imageUrl} alt="#" onClick={() => handleNavigate(product._id)} />
-                  <div className='cart-icon-image' onClick={() => { addToCart(product._id) }}>
+                  <img
+                    src={product.imageUrl}
+                    alt={product.name}
+                    onClick={() => handleNavigate(product._id)}
+                  />
+                  <div
+                    className="cart-icon-image"
+                    onClick={() => addToCart(product._id)}
+                  >
                     <FontAwesomeIcon icon={faShoppingCart} />
                   </div>
                 </div>
-                <div className={`${layout === 'grid' ? 'grid-description' : 'list-description'}`}>
-                  <p className='list-title'> <strong>{product.company} {product.name}</strong> </p>
-                  {layout === 'list' ? <p>{product.description}</p> : null}
-                  <span className='list-price'>Price - {product.price}</span>
-                  <p className='list-category'>{product.color} | {product.headphone_type}</p>
 
-                  {layout === 'list' ? <div className='view-button' onClick={() => handleNavigate(product._id)}>Details</div> : null}
+                <div
+                  className={
+                    layout === "grid" ? "grid-description" : "list-description"
+                  }
+                >
+                  <p className="list-title">
+                    <strong>
+                      {product.company} {product.name}
+                    </strong>
+                  </p>
+
+                  {layout === "list" ? <p>{product.description}</p> : null}
+
+                  <span className="list-price">Price - {product.price}</span>
+                  <p className="list-category">
+                    {product.color} | {product.headphoneType}
+                  </p>
+
+                  {layout === "list" ? (
+                    <div
+                      className="view-button"
+                      onClick={() => handleNavigate(product._id)}
+                    >
+                      Details
+                    </div>
+                  ) : null}
                 </div>
               </div>
             ))}
           </div>
-
-        </section >
-
+        </section>
       )}
 
-      {!token ? null :
+      {token ? (
         <div className="feedback-container">
-          <div className="feedback-icon" onClick={toggleFeedbackForm}>
-            <FontAwesomeIcon icon={faQuestionCircle} size='3x' />
+          <div
+            className="feedback-icon"
+            onClick={() => setShowFeedbackForm(!showFeedbackForm)}
+          >
+            <FontAwesomeIcon icon={faQuestionCircle} size="3x" />
           </div>
 
           {showFeedbackForm && (
             <div className="feedback-form">
               <h1>Type of feedback</h1>
-              <div className='select-option'>
-                <select defaultValue="choose" onChange={(e) => setFeedbackType(e.target.value)}>
-                  <option disabled value="choose">Choose the type</option>
+
+              <div className="select-option">
+                <select
+                  defaultValue="choose"
+                  onChange={(e) => setFeedbackType(e.target.value)}
+                >
+                  <option disabled value="choose">
+                    Choose the type
+                  </option>
                   <option value="bugs">Bugs</option>
                   <option value="feedback">Feedback</option>
                   <option value="query">Query</option>
                 </select>
               </div>
-              <div>
-                <textarea placeholder='Enter your feedback...' rows="4" cols="50"
-                  onChange={(e) => setMessage(e.target.value)}
 
+              <div>
+                <textarea
+                  placeholder="Enter your feedback..."
+                  rows="4"
+                  cols="50"
+                  onChange={(e) => setMessage(e.target.value)}
                 />
               </div>
+
               <div className="btn">
                 {error && <div className="error">{error}</div>}
-                <button onClick={handleFeedBacksubmit}>Submit</button>
+                <button onClick={handleFeedbackSubmit}>Submit</button>
               </div>
             </div>
-
           )}
         </div>
-
-      }
+      ) : null}
     </>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;
